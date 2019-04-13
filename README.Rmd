@@ -125,6 +125,7 @@ make_calendar_background(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   month = "August",
   family = "Purisa",
+  start_monday = FALSE, # change when the week starts for you
   filename = "man/figures/README-4.jpg"
 )
 ```

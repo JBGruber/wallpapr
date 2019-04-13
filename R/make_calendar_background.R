@@ -107,11 +107,16 @@ make_calendar_background <- function(img,
                      format(dat$date, "%d"),
                      format(dat$date, "%B"))
   dat$text <- gsub("^0", "", dat$text)
-  dat$day <- ifelse(dat$type == "date", weekdays(dat$date), "Thursday")
+  dat$day <- ifelse(dat$type == "date", weekdays(dat$date), ifelse(start_monday,
+                                                                   "Thursday",
+                                                                   "Wednesday"))
   dat$week <- ifelse(dat$type == "date",
     as.numeric(strftime(dat$date, format = "%V")),
     min(as.numeric(strftime(dat$date, format = "%V")) - 2 * headline_factor)
   )
+  if (!start_monday) {
+    dat$week[dat$day == "Sunday"] <- dat$week[dat$day == "Sunday"] + 1
+  }
   dat$day <- factor(dat$day, levels = wdays)
 
   dat2 <- data.frame(

@@ -3,10 +3,10 @@
 
 # wallpapr
 
-wallpapr is a little toy package to make desktop and phone backgrounds.
-The design is inspired (aka copied one-to-one) by the beautiful calender
-wallpapers of [Emma](http://emmastudies.com). You can check out her
-wallpapers at:
+wallpapr is a little toy `R` package to make desktop and phone
+backgrounds. The design is inspired (aka copied one-to-one) by the
+beautiful calender wallpapers of [Emma](http://emmastudies.com). You can
+check out her wallpapers at:
 [emmastudies.com/tagged/download](http://emmastudies.com/tagged/download).
 With this package you can create your own calender wallpapers using an
 input image.
