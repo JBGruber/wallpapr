@@ -6,8 +6,9 @@
 \usage{
 make_calendar_background(img, filename = paste0(format(Sys.Date(), format
   = "\%B"), img_format(img)), month = Sys.Date(), resolution = "auto",
-  colour = "white", fill = "grey", family = "", text_size = 9,
-  headline_factor = 2, start_monday = TRUE, locale = NULL)
+  scale = TRUE, colour = "white", fill = "grey", family = "",
+  text_size = 9, headline_factor = 2, start_monday = TRUE,
+  locale = NULL)
 }
 \arguments{
 \item{img}{character. Location of a background image.}
@@ -18,6 +19,9 @@ make_calendar_background(img, filename = paste0(format(Sys.Date(), format
 
 \item{resolution}{"auto" to use the resolution of the input image or vector
 of length two with width and height of the output image.}
+
+\item{scale}{if resolution is provided, should the image be scaled down/up
+before cropping to the provided resolution?}
 
 \item{colour}{colour of the font.}
 

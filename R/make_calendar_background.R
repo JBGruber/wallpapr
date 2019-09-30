@@ -5,6 +5,8 @@
 #' @param month either a date or name of a month in the current locale.
 #' @param resolution "auto" to use the resolution of the input image or vector
 #'   of length two with width and height of the output image.
+#' @param scale if resolution is provided, should the image be scaled down/up
+#'   before cropping to the provided resolution?
 #' @param colour colour of the font.
 #' @param fill a colour to fill the background.
 #' @param family font.
@@ -36,6 +38,7 @@ make_calendar_background <- function(img,
                                      ), img_format(img)),
                                      month = Sys.Date(),
                                      resolution = "auto",
+                                     scale = TRUE,
                                      colour = "white",
                                      fill = "grey",
                                      family = "",
@@ -67,14 +70,7 @@ make_calendar_background <- function(img,
     )
   )
 
-  last <- as.Date(
-    paste(
-      format(first, "%Y"),
-      as.numeric(format(first, "%m")) + 1,
-      format(first, "%d"),
-      sep = "-"
-    )
-  ) - 1
+  last <- seq(first, length = 2, by = "months")[2] - 1
 
   if (is.null(locale)) {
     if (start_monday) {
@@ -110,12 +106,19 @@ make_calendar_background <- function(img,
   dat$day <- ifelse(dat$type == "date", weekdays(dat$date), ifelse(start_monday,
                                                                    "Thursday",
                                                                    "Wednesday"))
-  dat$week <- ifelse(dat$type == "date",
-    as.numeric(strftime(dat$date, format = "%V")),
-    min(as.numeric(strftime(dat$date, format = "%V")) - 2 * headline_factor)
-  )
+  if (format(first, "%m") == "12") {
+    dat$week <- as.numeric(strftime(dat$date, format = "%V"))
+    dat$week[dat$week == 1] <- dat$week[dat$week == 1] + 52
+    dat$week[dat$type == "title"] <- dat$week[dat$type == "title"] - 2 * headline_factor
+  } else {
+    dat$week <- ifelse(dat$type == "date",
+                       as.numeric(strftime(dat$date, format = "%V")),
+                       min(as.numeric(strftime(dat$date, format = "%V")) - 2 * headline_factor)
+    )
+  }
+
   if (!start_monday) {
-    dat$week[dat$day == "Sunday"] <- dat$week[dat$day == "Sunday"] + 1
+    dat$week[dat$day == "Sunday"] <- dat$week[dat$day == "Sunday"]
   }
   dat$day <- factor(dat$day, levels = wdays)
 
@@ -124,7 +127,7 @@ make_calendar_background <- function(img,
     type = NA,
     text = substr(levels(dat$day), 1, 1),
     day = factor(levels(dat$day), levels(dat$day)),
-    week = min(as.numeric(strftime(dat$date, format = "%V")) - 1),
+    week = dat$week[dat$type == "title"] + headline_factor,
     stringsAsFactors = FALSE
   )
 
@@ -143,6 +146,13 @@ make_calendar_background <- function(img,
   } else if (length(resolution) >= 2) {
     width <- resolution[1]
     height <- resolution[2]
+    if (scale) {
+      scl <- image_scale(imgage, geometry_area(width = width))
+      if (image_info(scl)[[3]] < height) {
+        scl <- image_scale(imgage, geometry_area(height = height))
+      }
+      imgage <- scl
+    }
     imgage <- image_crop(imgage, geometry_area(width = width, height = height))
   }
 
