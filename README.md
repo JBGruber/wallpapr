@@ -85,7 +85,7 @@ make_calendar_background(
 )
 ```
 
-    ## wallpaper saved as April.jpg
+    ## wallpaper saved as August.jpg
 
 <img src="./man/figures/README-4.jpg">
 

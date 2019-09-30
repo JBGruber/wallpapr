@@ -117,7 +117,7 @@ make_calendar_background(
 )
 ```
 
-    ## wallpaper saved as April.jpg
+    ## wallpaper saved as August.jpg
 
 ```{r example4, echo=FALSE, message=FALSE}
 
