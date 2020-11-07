@@ -4,11 +4,20 @@
 \alias{make_calendar_background}
 \title{Make Calendar Background}
 \usage{
-make_calendar_background(img, filename = paste0(format(Sys.Date(), format
-  = "\%B"), img_format(img)), month = Sys.Date(), resolution = "auto",
-  scale = TRUE, colour = "white", fill = "grey", family = "",
-  text_size = 9, headline_factor = 2, start_monday = TRUE,
-  locale = NULL)
+make_calendar_background(
+  img,
+  filename = paste0(format(Sys.Date(), format = "\%B"), img_format(img)),
+  month = Sys.Date(),
+  resolution = "auto",
+  scale = TRUE,
+  colour = "white",
+  fill = "grey",
+  family = "",
+  text_size = 9,
+  headline_factor = 2,
+  start_monday = TRUE,
+  locale = NULL
+)
 }
 \arguments{
 \item{img}{character. Location of a background image.}
