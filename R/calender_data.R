@@ -25,14 +25,9 @@ calender_data <- function(month = Sys.Date(),
     stop("\"month\" was not given as a proper date or name of a month")
   }
 
-  first <- as.Date(
-    paste0(
-      format(
-        month,
-        format = "%Y-%m"
-      ), "-01"
-    )
-  )
+  first <- as.POSIXlt(month)
+  first$mday <- 1
+  first <- as.Date(first)
 
   last <- seq(first, length = 2, by = "months")[2] - 1
 
@@ -71,19 +66,17 @@ calender_data <- function(month = Sys.Date(),
                                                                    "Thursday",
                                                                    "Wednesday"))
   if (format(first, "%m") == "12") {
-    dat$week <- as.numeric(strftime(dat$date, format = "%V"))
+    dat$week <- as.numeric(strftime(dat$date + !start_monday, format = "%V"))
     dat$week[dat$week == 1] <- dat$week[dat$week == 1] + 52
     dat$week[dat$type == "title"] <- dat$week[dat$type == "title"] - 2 * headline_factor
   } else {
+    # account for year change
     dat$week <- ifelse(dat$type == "date",
-                       as.numeric(strftime(dat$date, format = "%V")),
-                       min(as.numeric(strftime(dat$date, format = "%V")) - 2 * headline_factor)
+                       as.numeric(strftime(dat$date + !start_monday, format = "%V")),
+                       min(as.numeric(strftime(dat$date + !start_monday, format = "%V")) - 2 * headline_factor)
     )
   }
 
-  if (!start_monday) {
-    dat$week[dat$day == "Sunday"] <- dat$week[dat$day == "Sunday"]
-  }
   dat$day <- factor(dat$day, levels = wdays)
 
   dat2 <- data.frame(
