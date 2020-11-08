@@ -9,6 +9,7 @@ make_calendar_background(
   filename,
   month = Sys.Date(),
   resolution = "auto",
+  position = "center",
   scale = TRUE,
   colour = "white",
   fill = "grey",
@@ -28,6 +29,10 @@ make_calendar_background(
 
 \item{resolution}{"auto" to use the resolution of the input image or vector
 of length two with width and height of the output image.}
+
+\item{position}{position of calendar in the image. Possible values are:
+"center", "bottom", "top", "right", "left", "bottomright", "bottomleft",
+"topright", "topleft" and a numeric vector of length 4 .}
 
 \item{scale}{if resolution is provided, should the image be scaled down/up
 before cropping to the provided resolution?}
@@ -58,5 +63,11 @@ Make Calendar Background
 \examples{
 make_calendar_background(
   system.file("extdata", "mull.jpg", package = "wallpapr")
+)
+
+# put in upper right corner
+make_calendar_background(
+  system.file("extdata", "zima.png", package = "wallpapr"),
+  position = c(2, 0, 2, 0)
 )
 }

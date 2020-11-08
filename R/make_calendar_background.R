@@ -5,6 +5,9 @@
 #' @param month either a date or name of a month in the current locale.
 #' @param resolution "auto" to use the resolution of the input image or vector
 #'   of length two with width and height of the output image.
+#' @param position position of calendar in the image. Possible values are:
+#'   "center", "bottom", "top", "right", "left", "bottomright", "bottomleft",
+#'   "topright", "topleft" and a numeric vector of length 4 .
 #' @param scale if resolution is provided, should the image be scaled down/up
 #'   before cropping to the provided resolution?
 #' @param colour colour of the font.
@@ -25,6 +28,12 @@
 #' make_calendar_background(
 #'   system.file("extdata", "mull.jpg", package = "wallpapr")
 #' )
+#'
+#' # put in upper right corner
+#' make_calendar_background(
+#'   system.file("extdata", "zima.png", package = "wallpapr"),
+#'   position = c(2, 0, 2, 0)
+#' )
 #' @import ggplot2
 #' @importFrom magick image_read image_scale geometry_area image_info image_crop
 #' @importFrom graphics text
@@ -34,6 +43,7 @@ make_calendar_background <- function(img,
                                      filename,
                                      month = Sys.Date(),
                                      resolution = "auto",
+                                     position = "center",
                                      scale = TRUE,
                                      colour = "white",
                                      fill = "grey",
@@ -70,6 +80,23 @@ make_calendar_background <- function(img,
     imgage <- image_crop(imgage, geometry_area(width = width, height = height))
   }
 
+  # position
+  if (is.character(position)) {
+    pos <- switch (position,
+                   center      = c(1, 1, 1, 1),
+                   bottom      = c(1, 1, 0.1, 1.9),
+                   top         = c(1, 1, 1.9, 0.1),
+                   right       = c(1.9, 0.1, 1, 1),
+                   left        = c(0.1, 1.9, 1, 1),
+                   bottomright = c(1.9, 0.1, 0.1, 1.9),
+                   bottomleft  = c(0.1, 1.9, 0.1, 1.9),
+                   topright    = c(1.9, 0.1, 1.9, 0.1),
+                   topleft     = c(0.1, 1.9, 1.9, 0.1)
+    )
+  } else if (is.numeric(position)) {
+    pos <- position
+  }
+
   plot <- ggplot(
     plot_data,
     aes_string(
@@ -82,8 +109,8 @@ make_calendar_background <- function(img,
     annotation_custom(grid::rasterGrob(imgage)) +
     geom_text(colour = colour, family = family, show.legend = FALSE) +
     scale_size_identity() +
-    scale_y_reverse(expand = c(1, -1)) +
-    scale_x_discrete(expand = c(1, 1)) +
+    scale_x_discrete(expand = expansion(mult = c(pos[1], pos[2]))) +
+    scale_y_reverse(expand = expansion(mult = c(pos[3], pos[4]))) +
     theme_void() +
     theme(panel.background = element_rect(fill = fill))
 
