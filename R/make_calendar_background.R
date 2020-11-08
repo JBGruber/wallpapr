@@ -26,16 +26,12 @@
 #'   system.file("extdata", "mull.jpg", package = "wallpapr")
 #' )
 #' @import ggplot2
-#' @import magick
+#' @importFrom magick image_read image_scale geometry_area image_info image_crop
 #' @importFrom graphics text
 #' @importFrom grid rasterGrob
-#' @importFrom tibble tibble
 #' @importFrom stringi stri_datetime_symbols stri_datetime_parse
 make_calendar_background <- function(img,
-                                     filename = paste0(format(
-                                       Sys.Date(),
-                                       format = "%B"
-                                     ), img_format(img)),
+                                     filename,
                                      month = Sys.Date(),
                                      resolution = "auto",
                                      scale = TRUE,
@@ -46,7 +42,6 @@ make_calendar_background <- function(img,
                                      headline_factor = 2,
                                      start_monday = TRUE,
                                      locale = NULL) {
-  imgage <- image_read(img)
 
   plot_data <- calender_data(
     month = month,
@@ -55,8 +50,7 @@ make_calendar_background <- function(img,
     start_monday = start_monday
   )
 
-  plot_data$size <- 1
-  plot_data$size[1] <- headline_factor
+  imgage <- image_read(img)
 
   dpi <- text_size * 100
 
@@ -93,6 +87,13 @@ make_calendar_background <- function(img,
     theme_void() +
     theme(panel.background = element_rect(fill = fill))
 
+  if (missing(filename)) {
+    filename <- paste0(format(
+      plot_data$date[1],
+      format = "%B-%Y"
+    ), ".", tools::file_ext(img))
+  }
+
   ggsave(
     filename = filename,
     dpi = dpi,
@@ -107,15 +108,13 @@ make_calendar_background <- function(img,
 
 #' Make calendar data
 #'
-#' Make the calendar data for plotting.
+#' Make the calendar data for plotting. Can be used alone if you want a more
+#' specialised plotting experience.
 #'
-#' @param month either a date or name of a month in the current locale.
-#' @param headline_factor the factor by which the name of the month is larger
-#'   then the remaining text (2 means twice the size).
-#' @param start_monday If TRUE the week starts on Monday, otherwise starts on
-#'   Sunday.
-#' @param locale provide locale if you want to use non English names for months
-#'   and days.
+#' @inheritParams make_calendar_background
+#'
+#' @return data.frame. Calendar data that works well with ggplot2.
+#' @export
 calender_data <- function(month,
                           headline_factor,
                           start_monday,
@@ -208,14 +207,8 @@ calender_data <- function(month,
                      stringsAsFactors = FALSE
   )
 
+  plot_data$size <- 1
+  plot_data$size[1] <- headline_factor
+
   return(plot_data)
-}
-
-
-#' Get image format
-#'
-#' @param img name of image.
-#' @noRd
-img_format <- function(img) {
-  stringi::stri_extract_last_regex(img, ".{4}$")
 }

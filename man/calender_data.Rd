@@ -18,6 +18,10 @@ Sunday.}
 \item{locale}{provide locale if you want to use non English names for months
 and days.}
 }
+\value{
+data.frame. Calendar data that works well with ggplot2.
+}
 \description{
-Make the calendar data for plotting.
+Make the calendar data for plotting. Can be used alone if you want a more
+specialised plotting experience.
 }

@@ -6,7 +6,7 @@
 \usage{
 make_calendar_background(
   img,
-  filename = paste0(format(Sys.Date(), format = "\%B"), img_format(img)),
+  filename,
   month = Sys.Date(),
   resolution = "auto",
   scale = TRUE,
