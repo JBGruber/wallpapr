@@ -153,6 +153,7 @@ make_calendar_background(
   system.file("extdata", "zima_4k.png", package = "wallpapr"),
   resolution = c(1080, 1920), # first number is width, second height
   family = "Purisa",
+  fill = "grey"
 )
 ```
 
