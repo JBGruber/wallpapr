@@ -71,11 +71,9 @@ make_calendar_background <- function(img,
     width <- resolution[1]
     height <- resolution[2]
     if (scale) {
-      scl <- image_scale(imgage, geometry_area(width = width))
-      if (image_info(scl)[[3]] < height) {
-        scl <- image_scale(imgage, geometry_area(height = height))
-      }
-      imgage <- scl
+      imgage <- image_scale(imgage,
+                            geometry_area(width = width,
+                                          height = height))
     }
     imgage <- image_crop(imgage, geometry_area(width = width, height = height))
   }
