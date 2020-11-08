@@ -23,7 +23,7 @@ With this package you can create your own calender wallpapers using an input ima
 
 ## Installation
 
-You can install wallpapr from GitHub with:
+You can install `wallpapr` from GitHub with:
 
 ``` r
 # install.packages("remotes")
@@ -32,7 +32,7 @@ remotes::install_github("JBGruber/wallpapr")
 
 ## Examples
 
-The package comes with two pictures you can use: a monochrome background in zima blue and a snapshot from the Isle of Mull I took:
+The package comes with two pictures you can use: a monochrome background in Zima blue and a snapshot from the Isle of Mull I took:
 
 ```{r eval=FALSE}
 library("wallpapr")
@@ -41,19 +41,38 @@ make_calendar_background(
 )
 ```
 
-    ## wallpaper saved as April.png
-
-```{r example1, echo=FALSE, message=FALSE}
+```{r default, echo=FALSE, message=FALSE}
 library("wallpapr")
 make_calendar_background(
   system.file("extdata", "zima.png", package = "wallpapr"),
-  filename = "man/figures/README-1.png"
+  filename = "man/figures/README-default.png"
 )
 ```
 
-<img src="./man/figures/README-1.png">
+<img src="./man/figures/README-default.png">
 
-By default, the wallpaper will have the same resolution and output format as the input image.
+By default, the wallpaper will have the same resolution and output format as the input image and the calendar is displayed in the center of the image.
+You can move the calendar using the `position` argument.
+
+```{r eval=FALSE}
+library("wallpapr")
+make_calendar_background(
+  system.file("extdata", "zima.png", package = "wallpapr"),
+  position = "topright"
+)
+```
+
+```{r topright, echo=FALSE, message=FALSE}
+library("wallpapr")
+make_calendar_background(
+  system.file("extdata", "zima.png", package = "wallpapr"),
+  position = "topright",
+  filename = "man/figures/README-topright.png"
+)
+```
+
+<img src="./man/figures/README-topright.png">
+
 If you use an image of a different size than 1920x1080, you might have to fiddle around with the `text_size` and `headline_factor` options. Additionally, you can use a different font:
 
 ```{r eval=FALSE}
@@ -64,8 +83,6 @@ make_calendar_background(
   headline_factor = 2
 )
 ```
-
-    ## wallpaper saved as April.png
 
 ```{r example2, echo=FALSE, message=FALSE}
 library("wallpapr")
@@ -90,8 +107,6 @@ make_calendar_background(
 )
 ```
 
-    ## wallpaper saved as April.jpg
-
 ```{r example3, echo=FALSE, message=FALSE}
 library("wallpapr")
 make_calendar_background(
@@ -110,17 +125,14 @@ If you want to plan ahead and get a calendar for a different month, enter either
 library("wallpapr")
 make_calendar_background(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
-  filename = "August.jpg"
+  filename = "August.jpg",
   month = "August",
   family = "Purisa",
   start_monday = FALSE # change when the week starts for you
 )
 ```
 
-    ## wallpaper saved as August.jpg
-
 ```{r example4, echo=FALSE, message=FALSE}
-
 make_calendar_background(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   month = "August",
@@ -143,8 +155,6 @@ make_calendar_background(
   family = "Purisa",
 )
 ```
-
-    ## wallpaper saved as April.png
 
 ```{r example5, echo=FALSE, message=FALSE}
 make_calendar_background(
@@ -172,8 +182,6 @@ make_calendar_background(
 )
 ```
 
-    ## wallpaper saved as April.png
-
 ```{r example6, echo=FALSE, message=FALSE}
 make_calendar_background(
   "https://www.r-project.org/logo/Rlogo.png",
@@ -188,5 +196,3 @@ make_calendar_background(
 <p align="center">
   <img src="./man/figures/README-6.png" height="400px">
 <p>
-
-

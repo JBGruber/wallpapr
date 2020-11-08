@@ -13,7 +13,7 @@ input image.
 
 ## Installation
 
-You can install wallpapr from GitHub with:
+You can install `wallpapr` from GitHub with:
 
 ``` r
 # install.packages("remotes")
@@ -23,7 +23,7 @@ remotes::install_github("JBGruber/wallpapr")
 ## Examples
 
 The package comes with two pictures you can use: a monochrome background
-in zima blue and a snapshot from the Isle of Mull I took:
+in Zima blue and a snapshot from the Isle of Mull I took:
 
 ``` r
 library("wallpapr")
@@ -32,14 +32,25 @@ make_calendar_background(
 )
 ```
 
-    ## wallpaper saved as April.png
-
-<img src="./man/figures/README-1.png">
+<img src="./man/figures/README-default.png">
 
 By default, the wallpaper will have the same resolution and output
-format as the input image. If you use an image of a different size than
-1920x1080, you might have to fiddle around with the `text_size` and
-`headline_factor` options. Additionally, you can use a different font:
+format as the input image and the calendar is displayed in the center of
+the image. You can move the calendar using the `position` argument.
+
+``` r
+library("wallpapr")
+make_calendar_background(
+  system.file("extdata", "zima.png", package = "wallpapr"),
+  position = "topright"
+)
+```
+
+<img src="./man/figures/README-topright.png">
+
+If you use an image of a different size than 1920x1080, you might have
+to fiddle around with the `text_size` and `headline_factor` options.
+Additionally, you can use a different font:
 
 ``` r
 make_calendar_background(
@@ -49,8 +60,6 @@ make_calendar_background(
   headline_factor = 2
 )
 ```
-
-    ## wallpaper saved as April.png
 
 <img src="./man/figures/README-2.png">
 
@@ -65,8 +74,6 @@ make_calendar_background(
 )
 ```
 
-    ## wallpaper saved as April.jpg
-
 <img src="./man/figures/README-3.jpg">
 
 By default, the current month is used to produce the wallpaper. If you
@@ -78,14 +85,12 @@ year).
 library("wallpapr")
 make_calendar_background(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
-  filename = "August.jpg"
+  filename = "August.jpg",
   month = "August",
   family = "Purisa",
   start_monday = FALSE # change when the week starts for you
 )
 ```
-
-    ## wallpaper saved as August.jpg
 
 <img src="./man/figures/README-4.jpg">
 
@@ -100,8 +105,6 @@ make_calendar_background(
   family = "Purisa",
 )
 ```
-
-    ## wallpaper saved as April.png
 
 <p align="center">
 
@@ -122,8 +125,6 @@ make_calendar_background(
   family = "Purisa",
 )
 ```
-
-    ## wallpaper saved as April.png
 
 <p align="center">
 
