@@ -130,4 +130,5 @@ make_calendar_background <- function(img,
     plot = plot
   )
   message("wallpaper saved as ", filename)
+  return(invisible(filename))
 }
