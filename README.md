@@ -122,8 +122,7 @@ make_calendar_background(
   resolution = c(1080, 1920),
   colour = "black",
   fill = "darkseagreen",
-  family = "Purisa",
-  family = "Purisa",
+  family = "Purisa"
 )
 ```
 
