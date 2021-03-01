@@ -3,6 +3,13 @@
 
 # wallpapr
 
+<!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/JBGruber/wallpapr/branch/master/graph/badge.svg)](https://codecov.io/gh/JBGruber/wallpapr?branch=master)
+[![R-CMD-check](https://github.com/JBGruber/wallpapr/workflows/R-CMD-check/badge.svg)](https://github.com/JBGruber/wallpapr/actions)
+<!-- badges: end -->
+
 wallpapr is a little toy `R` package to make desktop and phone
 backgrounds. The design is inspired (aka copied one-to-one) by the
 beautiful calender wallpapers of [Emma](http://emmastudies.com). You can
@@ -108,9 +115,7 @@ make_calendar_background(
 ```
 
 <p align="center">
-
 <img src="./man/figures/README-5.png" height="400px">
-
 <p>
 
 If you have a picture in a wrong size or without background colour, you
@@ -127,7 +132,5 @@ make_calendar_background(
 ```
 
 <p align="center">
-
 <img src="./man/figures/README-6.png" height="400px">
-
 <p>

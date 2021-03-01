@@ -18,8 +18,11 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    spelling
+    spelling,
+    testthat (>= 3.0.0),
+    covr
 Language: en-GB
 URL: https://github.com/JBGruber/wallpapr
 BugReports: https://github.com/JBGruber/wallpapr/issues
 RoxygenNote: 7.1.1
+Config/testthat/edition: 3
