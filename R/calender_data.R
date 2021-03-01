@@ -65,9 +65,14 @@ calender_data <- function(month = Sys.Date(),
   dat$day <- ifelse(dat$type == "date", weekdays(dat$date), ifelse(start_monday,
                                                                    "Thursday",
                                                                    "Wednesday"))
+  # December and January need special treatment
   if (format(first, "%m") == "12") {
     dat$week <- as.numeric(strftime(dat$date + !start_monday, format = "%V"))
     dat$week[dat$week == 1] <- dat$week[dat$week == 1] + 52
+    dat$week[dat$type == "title"] <- dat$week[dat$type == "title"] - 2 * headline_factor
+  } else if (format(first, "%m") == "01") {
+    dat$week <- as.numeric(strftime(dat$date + !start_monday, format = "%V"))
+    dat$week[dat$week == 53] <- 0
     dat$week[dat$type == "title"] <- dat$week[dat$type == "title"] - 2 * headline_factor
   } else {
     # account for year change
