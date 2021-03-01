@@ -25,15 +25,17 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' make_calendar_background(
 #'   system.file("extdata", "mull.jpg", package = "wallpapr")
 #' )
 #'
-#' # put in upper right corner
+#' # put dates in upper right corner
 #' make_calendar_background(
 #'   system.file("extdata", "zima.png", package = "wallpapr"),
 #'   position = c(2, 0, 2, 0)
 #' )
+#' }
 #' @import ggplot2
 #' @importFrom magick image_read image_scale geometry_area image_info image_crop
 #' @importFrom graphics text

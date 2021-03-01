@@ -10,7 +10,7 @@ make_calendar_background(
   month = Sys.Date(),
   resolution = "auto",
   position = "center",
-  scale = TRUE,
+  scale = c("width", "height"),
   colour = "white",
   fill = "grey",
   family = "",
@@ -61,13 +61,15 @@ saves image in file location
 Make Calendar Background
 }
 \examples{
+\dontrun{
 make_calendar_background(
   system.file("extdata", "mull.jpg", package = "wallpapr")
 )
 
-# put in upper right corner
+# put dates in upper right corner
 make_calendar_background(
   system.file("extdata", "zima.png", package = "wallpapr"),
   position = c(2, 0, 2, 0)
 )
+}
 }
