@@ -44,7 +44,7 @@ make_calendar_background <- function(img,
                                      month = Sys.Date(),
                                      resolution = "auto",
                                      position = "center",
-                                     scale = TRUE,
+                                     scale = c("width", "height"),
                                      colour = "white",
                                      fill = "grey",
                                      family = "",
@@ -70,14 +70,28 @@ make_calendar_background <- function(img,
   } else if (length(resolution) >= 2) {
     width <- resolution[1]
     height <- resolution[2]
-    if (scale) {
-      scl <- image_scale(imgage, geometry_area(width = width))
-      if (image_info(scl)[[3]] < height) {
-        scl <- image_scale(imgage,
-                           geometry_area(width = width,
-                                         height = height))
+    if (!is.null(scale)) {
+      if (isTRUE(scale)) {
+        scale  <-  "width"
       }
-      imgage <- scl
+      scale = match.arg(scale)
+      if (isTRUE(scale == "width")) {
+        scl <- image_scale(imgage, geometry_area(width = width))
+        if (image_info(scl)[[3]] < height) {
+          scl <- image_scale(imgage,
+                             geometry_area(width = width,
+                                           height = height))
+        }
+        imgage <- scl
+      } else if (isTRUE(scale == "height")) {
+        scl <- image_scale(imgage, geometry_area(height = height))
+        if (image_info(scl)[[3]] < width) {
+          scl <- image_scale(imgage,
+                             geometry_area(width = width,
+                                           height = height))
+        }
+        imgage <- scl
+      }
     }
     imgage <- image_crop(imgage, geometry_area(width = width, height = height))
   }
