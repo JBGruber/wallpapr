@@ -118,6 +118,24 @@ make_wallpapr(
 <img src="./man/figures/README-5.png" height="400px">
 <p>
 
+When this happens, you can employ the `scale` argument to scale and crop
+the image into a format which fills the entire `"width"` or `"height"`
+of the calendar.
+
+``` r
+make_wallpapr(
+  system.file("extdata", "zima_4k.png", package = "wallpapr"),
+  resolution = c(1080, 1920), # first number is width, second height
+  family = "Purisa",
+  fill = "grey",
+  scale = "height"
+)
+```
+
+<p align="center">
+<img src="./man/figures/README-6.png" height="400px">
+<p>
+
 If you have a picture in a wrong size or without background colour, you
 can also use `fill` to fill the remaining space:
 
@@ -132,5 +150,5 @@ make_wallpapr(
 ```
 
 <p align="center">
-<img src="./man/figures/README-6.png" height="400px">
+<img src="./man/figures/README-7.png" height="400px">
 <p>
