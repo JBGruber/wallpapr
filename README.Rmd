@@ -41,14 +41,14 @@ The package comes with two pictures you can use: a monochrome background in Zima
 
 ```{r eval=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima.png", package = "wallpapr"),
 )
 ```
 
 ```{r default, echo=FALSE, message=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima.png", package = "wallpapr"),
   filename = "man/figures/README-default.png"
 )
@@ -61,7 +61,7 @@ You can move the calendar using the `position` argument.
 
 ```{r eval=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima.png", package = "wallpapr"),
   position = "topright"
 )
@@ -69,7 +69,7 @@ make_calendar_background(
 
 ```{r topright, echo=FALSE, message=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima.png", package = "wallpapr"),
   position = "topright",
   filename = "man/figures/README-topright.png"
@@ -81,7 +81,7 @@ make_calendar_background(
 If you use an image of a different size than 1920x1080, you might have to fiddle around with the `text_size` and `headline_factor` options. Additionally, you can use a different font:
 
 ```{r eval=FALSE}
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima_4k.png", package = "wallpapr"),
   family = "Purisa",
   text_size = 16,
@@ -91,7 +91,7 @@ make_calendar_background(
 
 ```{r example2, echo=FALSE, message=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima_4k.png", package = "wallpapr"),
   filename = "man/figures/README-2.png",
   family = "Purisa",
@@ -106,7 +106,7 @@ Of course, the main thing you want to do is to use a stunning background image f
 
 ```{r eval=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   family = "Purisa"
 )
@@ -114,7 +114,7 @@ make_calendar_background(
 
 ```{r example3, echo=FALSE, message=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   family = "Purisa",
   filename = "man/figures/README-3.jpg"
@@ -128,7 +128,7 @@ If you want to plan ahead and get a calendar for a different month, enter either
 
 ```{r eval=FALSE}
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   filename = "August.jpg",
   month = "August",
@@ -138,7 +138,7 @@ make_calendar_background(
 ```
 
 ```{r example4, echo=FALSE, message=FALSE}
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   month = "August",
   family = "Purisa",
@@ -154,7 +154,7 @@ It is also possible to use a wallpaper size different from the input image.
 Make sure though that the input image is large enough (otherwise the additional space is filled with the `fill` colour):
 
 ```{r eval=FALSE}
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima_4k.png", package = "wallpapr"),
   resolution = c(1080, 1920), # first number is width, second height
   family = "Purisa",
@@ -163,7 +163,7 @@ make_calendar_background(
 ```
 
 ```{r example5, echo=FALSE, message=FALSE}
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima_4k.png", package = "wallpapr"),
   resolution = c(1080, 1920),
   family = "Purisa",
@@ -178,7 +178,7 @@ make_calendar_background(
 If you have a picture in a wrong size or without background colour, you can also use `fill` to fill the remaining space:
 
 ```{r eval=FALSE}
-make_calendar_background(
+make_wallpapr(
   "https://www.r-project.org/logo/Rlogo.png",
   resolution = c(1080, 1920),
   colour = "black",
@@ -188,7 +188,7 @@ make_calendar_background(
 ```
 
 ```{r example6, echo=FALSE, message=FALSE}
-make_calendar_background(
+make_wallpapr(
   "https://www.r-project.org/logo/Rlogo.png",
   resolution = c(1080, 1920),
   colour = "black",

@@ -34,7 +34,7 @@ in Zima blue and a snapshot from the Isle of Mull I took:
 
 ``` r
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima.png", package = "wallpapr"),
 )
 ```
@@ -47,7 +47,7 @@ the image. You can move the calendar using the `position` argument.
 
 ``` r
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima.png", package = "wallpapr"),
   position = "topright"
 )
@@ -60,7 +60,7 @@ to fiddle around with the `text_size` and `headline_factor` options.
 Additionally, you can use a different font:
 
 ``` r
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima_4k.png", package = "wallpapr"),
   family = "Purisa",
   text_size = 16,
@@ -75,7 +75,7 @@ image for your calendar wallpaper:
 
 ``` r
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   family = "Purisa"
 )
@@ -90,7 +90,7 @@ year).
 
 ``` r
 library("wallpapr")
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "mull.jpg", package = "wallpapr"),
   filename = "August.jpg",
   month = "August",
@@ -106,7 +106,7 @@ image. Make sure though that the input image is large enough (otherwise
 the additional space is filled with the `fill` colour):
 
 ``` r
-make_calendar_background(
+make_wallpapr(
   system.file("extdata", "zima_4k.png", package = "wallpapr"),
   resolution = c(1080, 1920), # first number is width, second height
   family = "Purisa",
@@ -122,7 +122,7 @@ If you have a picture in a wrong size or without background colour, you
 can also use `fill` to fill the remaining space:
 
 ``` r
-make_calendar_background(
+make_wallpapr(
   "https://www.r-project.org/logo/Rlogo.png",
   resolution = c(1080, 1920),
   colour = "black",

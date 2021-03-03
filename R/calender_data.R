@@ -3,7 +3,7 @@
 #' Make the calendar data for plotting. Can be used alone if you want a more
 #' specialised plotting experience.
 #'
-#' @inheritParams make_calendar_background
+#' @inheritParams make_wallpapr
 #'
 #' @return data.frame. Calendar data that works well with ggplot2.
 #' @export

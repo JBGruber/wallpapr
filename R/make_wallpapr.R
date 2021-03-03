@@ -18,6 +18,7 @@
 #'   then the remaining text (2 means twice the size).
 #' @param start_monday If TRUE the week starts on Monday, otherwise starts on
 #'   Sunday.
+#' @param return_plot Instead of saving to a file, return a ggplot2 plot object.
 #' @param locale provide locale if you want to use non English names for months
 #'   and days.
 #'
@@ -41,19 +42,20 @@
 #' @importFrom graphics text
 #' @importFrom grid rasterGrob
 #' @importFrom stringi stri_datetime_symbols stri_datetime_parse
-make_calendar_background <- function(img,
-                                     filename,
-                                     month = Sys.Date(),
-                                     resolution = "auto",
-                                     position = "center",
-                                     scale = c("width", "height"),
-                                     colour = "white",
-                                     fill = "grey",
-                                     family = "",
-                                     text_size = 9,
-                                     headline_factor = 2,
-                                     start_monday = TRUE,
-                                     locale = NULL) {
+make_wallpapr <- function(img,
+                          filename,
+                          month = Sys.Date(),
+                          resolution = "auto",
+                          position = "center",
+                          scale = c("width", "height"),
+                          colour = "white",
+                          fill = "grey",
+                          family = "",
+                          text_size = 9,
+                          headline_factor = 2,
+                          start_monday = TRUE,
+                          return_plot = FALSE,
+                          locale = NULL) {
 
   plot_data <- calender_data(
     month = month,
@@ -132,21 +134,49 @@ make_calendar_background <- function(img,
     theme_void() +
     theme(panel.background = element_rect(fill = fill))
 
-  if (missing(filename)) {
-    filename <- paste0(format(
-      plot_data$date[1],
-      format = "%B-%Y"
-    ), ".", tools::file_ext(img))
-  }
-
-  ggsave(
-    filename = filename,
+  attr(plot, "dims") <- list(
     dpi = dpi,
-    width = width / dpi,
-    height = height / dpi,
+    width = width,
+    height = height
+  )
+  class(plot) <- c("wallpapr", class(plot))
+
+  if (!return_plot) {
+    if (missing(filename)) {
+      filename <- paste0(format(
+        plot_data$date[1],
+        format = "%B-%Y"
+      ), ".", tools::file_ext(img))
+    }
+    save_wallpapr(plot, filename)
+    return(invisible(filename))
+  } else {
+    return(plot)
+  }
+}
+
+
+#' Save wallpapr as a file
+#'
+#' Export the plot created with make_wallpapr to an image file.
+#'
+#' @param plot plot created with make_wallpapr.
+#' @inheritParams make_wallpapr
+#'
+#' @export
+save_wallpapr <- function(plot, filename) {
+
+  dims <- attr(plot, "dims")
+
+  ggplot2::ggsave(
+    filename = filename,
+    dpi = dims$dpi,
+    width = dims$width / dims$dpi,
+    height = dims$height / dims$dpi,
     units = "in",
     plot = plot
   )
   message("wallpaper saved as ", filename)
   return(invisible(filename))
+
 }
