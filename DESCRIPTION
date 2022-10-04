@@ -2,7 +2,7 @@ Package: wallpapr
 Type: Package
 Title: Create calender wallpapers for your desktop and phone from R
 Version: 0.1.0
-Authors@R: person("Johannes", "Gruber", email = "j.gruber.1@research.gla.ac.uk", 
+Authors@R: person("Johannes", "Gruber", email = "JohannesB.Gruber@gmail.com", 
   role = c("aut", "cre"))
 Description: Inspired by the beautiful calender wallpapers of Emma
   <http://emmastudies.com/tagged/download>.
